@@ -25,11 +25,16 @@ FetchContent_MakeAvailable(SFML)
 
 file(GLOB SRCS CONFIGURE_DEPENDS
     ${CMAKE_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/framework/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/gui/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/layer/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/utils/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/activity/*.cpp
 )
 
 add_executable(game ${SRCS})
 # target_link_libraries(game PRIVATE sfml-graphics sfml-window sfml-system sfml-audio SQLiteCpp sqlite3)
-target_link_libraries(game PRIVATE sfml-graphics sfml-window sfml-system sfml-audio)
+target_link_libraries(game PRIVATE sfml-network sfml-graphics sfml-window sfml-system sfml-audio)
 if (UNIX)
     target_link_libraries(game PRIVATE pthread dl)
 endif()
@@ -38,6 +43,12 @@ target_compile_features(game PRIVATE cxx_std_17)
 
 target_include_directories(game PRIVATE
     ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/include/framework
+    ${CMAKE_SOURCE_DIR}/include/framework/profile
+    ${CMAKE_SOURCE_DIR}/include/gui
+    ${CMAKE_SOURCE_DIR}/include/layer
+    ${CMAKE_SOURCE_DIR}/include/utils
+    ${CMAKE_SOURCE_DIR}/include/activity
 )
 
 if(WIN32)
